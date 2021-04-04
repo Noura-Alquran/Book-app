@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Fredericka+the+Great&display=swap');
+
+*{
+    box-sizing: border-box;
+}
+body{
+    width:100%;
+    /* display:grid;
+    justify-content: center; */
+    text-align: center;
+    font-family: 'Abel', sans-serif;
+    background-color: rgb(218, 214, 214);
+
+}
+
+  
