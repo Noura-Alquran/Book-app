@@ -44,7 +44,7 @@ function createSearch(req, res) {
 
 function Books(book) {
     const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-    this.image = book.imageLinks.thumbnail || placeholderImage;
+    this.image = book.imageLinks ? book.imageLinks.thumbnail : placeholderImage;
     this.title = book.title || 'No title available';
     this.author= book.authors || 'No author avaliable';
     this.description = book.description ||book.subtitle || 'Description not Found for this book';
