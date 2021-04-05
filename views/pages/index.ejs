@@ -15,8 +15,24 @@
 <form action="/searches/new" method="get">
   <button id="indexa" type="submit">Go to Search page</button>
 </form>
-
-<img src="https://i.pinimg.com/originals/e6/a5/98/e6a5986bc18fd149ebc29f79cb7ebe58.jpg" alt="">
-
+<main>
+  <h2>There is <%=resultsNum %> books added to your menu</h2>
+  <% if (results.length) { %>
+  <% results.forEach(book=> {%>
+  <div id="">
+    <img src="<%= book.image %>" alt="">
+    <p id="title">
+      <%= book.title %>
+    </p>
+    <p id="author">
+      <%= book.author %>
+    </p>
+     <a href='/books/<%= book.id %>' target="_blank" rel="noopener noreferrer">View details</a>
+   <% }) %> 
+   <% } else { %>
+    <p>No data was found</p>
+    <% } %>
+  </div>
+</main>
 </body>
 </html>
