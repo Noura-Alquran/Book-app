@@ -1,40 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book-app</title>
-    <link rel="stylesheet" href="styles/reset.css">
-     <link rel="stylesheet" href="styles/base.css">
-     <link rel="stylesheet" href="styles/layout.css">
-     <link rel="stylesheet" href="styles/modules.css">
-</head>
-<body>
-<h1 id="indexh1">Welcome to you in our Book-app</h1> 
-<form action="/searches/new" method="get">
-  <button id="indexa" type="submit">Go to Search page</button>
-</form>
-<main class="main">
-  <h2>There is <%=resultsNum %> books added to your menu</h2>
-  <% if (results.length) { %>
-  <% results.forEach(book=> {%>
-  <div>
-    <img src="<%= book.image %>" alt="">
-    <p id="title">
-      <%= book.title %>
-    </p>
-    <p id="author">
-      <%= book.author %>
-    </p>
-     <a href='/books/<%= book.id %>' target="_blank" rel="noopener noreferrer">View details</a>
-     </div>  
-     <% }) %> 
-   <% } else { %>
-    <p>No data was found</p>
- 
-     <% } %>
 
-</main>
+<head>
+    <%- include('./layout/head.ejs') %>
+        <title>Book-app</title>
+
+
+</head>
+
+<body>
+    <h1 id="indexh1">Welcome to you in our Book-app</h1>
+    <form action="/searches/new" method="get">
+        <button id="indexa" type="submit">Go to Search page</button>
+    </form>
+    <main class="main">
+        <h2>There is
+            <%=resultsNum %> books added to your menu</h2>
+        <% if (results.length) { %>
+            <% results.forEach(book=> {%>
+                <div>
+                    <img src="<%= book.image %>" alt="">
+                    <p id="title">
+                        <%= book.title %>
+                    </p>
+                    <p id="author">
+                        <%= book.author %>
+                    </p>
+                    <a href='/books/<%= book.id %>' target="_blank" rel="noopener noreferrer">View details</a>
+                </div>
+                <% }) %>
+                    <% } else { %>
+                        <p>No data was found</p>
+
+                        <% } %>
+
+    </main>
 </body>
+
 </html>

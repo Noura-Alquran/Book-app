@@ -1,19 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Error!!</title>
-    <link rel="stylesheet" href="styles/reset.css">
-    <link rel="stylesheet" href="styles/base.css">
-    <link rel="stylesheet" href="styles/layout.css">
-    <link rel="stylesheet" href="styles/modules.css">
+    <%- include('./layout/head.ejs') %>
+
 </head>
+
 <body>
     <img id="error" src="https://assets-global.website-files.com/6009ec8cda7f305645c9d91b/601082646d6bf4446451b0a4_6002086f72b72717ae01d954_google-doc-error-message.png" alt="">
-    
-    <div id="renderError"><h1><%=massage%></h1>
-    <p><%=error%></p></div>
+
+    <div id="renderError">
+        <h1>
+            <%=massage%>
+        </h1>
+        <p>
+            <%=error%>
+        </p>
+    </div>
 </body>
+
 </html>
