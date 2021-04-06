@@ -15,13 +15,14 @@ app.use(express.urlencoded({ extended: true, }));
 
 
 
-const client = new pg.Client(process.env.DATABASE_URL);
-// const client = new pg.Client({
-//   connectionString: DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
+// const client= new pg.Client(process.env.DATABASE_URL);
+
+const client = new pg.Client({
+    connectionString: DATABASE_URL,
+    ssl: {
+        rejectUnauthorized: false
+    }
+});
 
 app.set('view engine', 'ejs');
 app.get('/', renderHomePage);
@@ -109,8 +110,10 @@ app.use('*', function(req, res) {
     res.status(404).send('noting to show here');
 });
 client.connect().then(() => {
-    app.listen(PORT, () => {
-        console.log("Connected to database:", client.connectionParameters.database) //show what database we connected to
-        console.log(`Listening to Port ${PORT}`); //start point for the application"initialisation"
-    });
+app.listen(PORT, () => {
+console.log("Connected to database:", client.connectionParameters.database) //show what database we connected to
+console.log(`Listening to Port ${PORT}`); //start point for the application"initialisation"
+});
+})
+});
 })
