@@ -12,14 +12,14 @@ app.use(express.static('./public'));
 // app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({extended:true,}));
 
-// const client = new pg.Client({
-//   connectionString: DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
+const client = new pg.Client({
+  connectionString: DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
-const client = new pg.Client(process.env.DATABASE_URL);
+// const client = new pg.Client(process.env.DATABASE_URL);
 
 client.on('error', error => console.error(error));
 
