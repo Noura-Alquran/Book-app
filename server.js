@@ -109,11 +109,10 @@ function Books(info) {
 app.use('*', function(req, res) {
     res.status(404).send('noting to show here');
 });
+
 client.connect().then(() => {
-app.listen(PORT, () => {
-console.log("Connected to database:", client.connectionParameters.database) //show what database we connected to
-console.log(`Listening to Port ${PORT}`); //start point for the application"initialisation"
-});
-})
-});
-})
+    app.listen(PORT, () => {
+        console.log("Connected to database:", client.connectionParameters.database) //show what database we connected to
+        console.log(`Listening to Port ${PORT}`); //start point for the application"initialisation"
+    });
+})      }           
