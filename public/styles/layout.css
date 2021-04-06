@@ -1,102 +1,56 @@
-
 /*error*/
-#error{
-width: 1200px;
-margin-bottom: 100px;
-height:700px;
-overflow: hidden;
 
+#error {
+    width: 1200px;
+    margin-bottom: 100px;
+    height: 700px;
+    overflow: hidden;
 }
-#renderError{
+
+#renderError {
     font-size: 40px;
     font-weight: bolder;
     position: relative;
     bottom: 350px;
 }
+
+
 /*index*/
-#indexh1{
-    font-size:40px ;
+
+#indexh1 {
+    font-size: 40px;
     font-weight: bold;
     overflow: hidden;
     background-color: gray;
 }
-#indexa{
-font-size: 24px;
-text-decoration: none;
-margin: 30px;
-color:white;
-background-color: black;
-width: 15%;
-height: 40px;
-margin-left: 50px;
 
+#indexa {
+    font-size: 24px;
+    text-decoration: none;
+    margin: 30px;
+    color: white;
+    background-color: black;
+    width: 15%;
+    height: 40px;
+    margin-left: 50px;
 }
+
+
+/**/
+
 .main {
     width: 50%;
     margin-left: auto;
     margin-right: auto;
     background-color: rgb(219, 219, 219);
     height: 100vh;
-  }
-  .main div {
+}
+
+.main div {
     text-align: center;
     background-color: lightgrey;
     margin-top: 8vh;
     margin-bottom: 10vh;
     padding: 3vh 8vw;
     border: outset 4px rgb(160, 160, 160);
-  }
-  .main div img {
-    width: 270px;
-    height: 370px;
-    margin: 3vh auto;
-  }
-  .main form {
-    margin: 0 auto;
-    margin-top: 5vh;
-    text-align: center;
-  }
-  #search {
-    width: 75%;
-    height: 50px;
-    border: solid gray 1px;
-    border-radius: 3px;
-  }
-  .checkbox {
-    margin: 3vh auto;
-    width: 75%;
-    height: 50px;
-    border-radius: 3px;
-    background-color: rgb(110, 110, 110);
-  }
-  .main form button {
-    width: 75%;
-    height: 50px;
-    background-color: black;
-    border-radius: 3px;
-    color: white;
-  }
-  #title {
-    font-family: 'Fredericka the Great', cursive;
-    font-size: xx-large;
-    margin: 3vh auto;
-  }
-  #author {
-    font-style: italic;
-    margin: 3vh auto;
-  }
-  .main h4 {
-    font-size: xx-large;
-    text-align: center;
-    background-color: rgba(73, 73, 73, 0.521);
-    color: white;
-    height: 7vh;
-    padding-top: 1vh;
-  }
-  .main h1 {
-    font-size: xx-large;
-    background-color: black;
-    color: white;
-    height: 10vh;
-    padding-top: 2vh;
-  }
+}

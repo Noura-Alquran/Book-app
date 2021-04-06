@@ -1,39 +1,43 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Book Collection</title>
-  <link rel="stylesheet" href="/styles/reset.css">
-  <link rel="stylesheet" href="/styles/base.css">
-  <link rel="stylesheet" href="/styles/layout.css">
-  <link rel="stylesheet" href="/styles/modules.css">
+    <%- include('./layout/head.ejs') %>
+
+        <title>Book Collection</title>
+
 </head>
+
 <body>
-  <main class="main">
-    <h1 id ="best">Best Books !</h1>
-    <h4> Search Result</h4>
-    <% results.forEach(book=> {%>
-      <div>
-        <img src="<%= book.image %>" alt="">
-        <p id="title">
-          <%= book.title %>
-        </p>
-        <p id="author">
-          <%= book.authors %>
-        </p>
-        <p>
-          <%= book.description %>
-        </p>
-        <form action="/books" method="POST">
-          <input type="hidden" name="image" value="<%= book.image %>">
-          <input type="hidden" name="title" value="<%=book.title %>">
-          <input type="hidden" name="author" value="<%= book.author%>">
-          <input type="hidden" name="description" value="<%= book.description %>">
-          <input type="hidden" name="ISBN" value="<%= book.isbn %>">
-          <input type="hidden" name="description" value="<%= book.bookshelf%>">
-        <button type="submit">Add new book</button>
-       </form>
-    </div>
-      <% }) %>
-  </main>
+    <main class="main">
+        <h1 id="best">Best Books !</h1>
+        <h4> Search Result</h4>
+        <div>
+            <% results.forEach(book=> {%>
+
+                <img src="<%= book.image %>" alt="">
+                <p id="title">
+                    <%= book.title %>
+                </p>
+                <p id="author">
+                    <%= book.authors %>
+                </p>
+                <p>
+                    <%= book.description %>
+                </p>
+                <form action="/books" method="POST">
+                    <input type="hidden" name="title" value="<%=book.title %>">
+                    <input type="hidden" name="author" value="<%= book.author%>">
+                    <input type="hidden" name="ISBN" value="<%= book.isbn %>">
+                    <input type="hidden" name="image" value="<%= book.image %>">
+                    <input type="hidden" name="description" value="<%= book.description %>">
+                    <input type="hidden" name="description" value="<%= book.bookshelf%>">
+                    <button type="submit">Add new book</button>
+                </form>
+                <% }) %>
+        </div>
+
+    </main>
 </body>
+
 </html>

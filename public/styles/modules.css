@@ -1,0 +1,62 @@
+.main div img {
+    width: 270px;
+    height: 370px;
+    margin: 3vh auto;
+}
+
+.main form {
+    margin: 0 auto;
+    margin-top: 5vh;
+    text-align: center;
+}
+
+#search {
+    width: 75%;
+    height: 50px;
+    border: solid gray 1px;
+    border-radius: 3px;
+}
+
+.checkbox {
+    margin: 3vh auto;
+    width: 75%;
+    height: 50px;
+    border-radius: 3px;
+    background-color: rgb(110, 110, 110);
+}
+
+.main form button {
+    width: 75%;
+    height: 50px;
+    background-color: black;
+    border-radius: 3px;
+    color: white;
+}
+
+#title {
+    font-family: 'Fredericka the Great', cursive;
+    font-size: xx-large;
+    margin: 3vh auto;
+}
+
+#author {
+    font-style: italic;
+    margin: 3vh auto;
+}
+
+.main h4 {
+    font-size: xx-large;
+    text-align: center;
+    background-color: rgba(73, 73, 73, 0.521);
+    color: white;
+    height: 7vh;
+    padding-top: 1vh;
+}
+
+.main h1 {
+    font-size: xx-large;
+    background-color: black;
+    color: white;
+    height: 10vh;
+    padding-top: 2vh;
+}
