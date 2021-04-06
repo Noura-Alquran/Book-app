@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Detail-view</title>
-    <link rel="stylesheet" href="/styles/reset.css">
-    <link rel="stylesheet" href="/styles/base.css">
-    <link rel="stylesheet" href="/styles/layout.css">
-    <link rel="stylesheet" href="/styles/modules.css">
-</head>
-<body>
-    
-    <h1 id ="best">Best Books !</h1>
-    <h4> Search Result</h4>
-    <form action="/" method="get">
-        <button id="indexa" type="submit">Go to the main page</button>
-      </form>
-    <main>
-    <section>
+
+<section>
    <% results.forEach(book=> {%>  
     <img src="<%= book.image %>" alt="">    
     <h2><%= book.title%></h2>
@@ -27,8 +8,5 @@
     <p>ISPN : <%=book.isbn%></p>
     <p>Bookshelf : <%=book.bookshelf%></p>
     <% }) %>
-    </section>
-    </main> 
-</body>
-</html>
-
+</section>
+   

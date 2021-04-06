@@ -11,7 +11,7 @@
   <main class="main">
     <h1 id ="best">Best Books !</h1>
     <h4> Search Result</h4>
-    <% searchResults.forEach(book=> {%>
+    <% results.forEach(book=> {%>
       <div>
         <img src="<%= book.image %>" alt="">
         <p id="title">
@@ -23,7 +23,16 @@
         <p>
           <%= book.description %>
         </p>
-      </div>
+        <form action="/books" method="POST">
+          <input type="hidden" name="image" value="<%= book.image %>">
+          <input type="hidden" name="title" value="<%=book.title %>">
+          <input type="hidden" name="author" value="<%= book.author%>">
+          <input type="hidden" name="description" value="<%= book.description %>">
+          <input type="hidden" name="ISBN" value="<%= book.isbn %>">
+          <input type="hidden" name="description" value="<%= book.bookshelf%>">
+        <button type="submit">Add new book</button>
+       </form>
+    </div>
       <% }) %>
   </main>
 </body>
