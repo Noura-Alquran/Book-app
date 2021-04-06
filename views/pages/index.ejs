@@ -15,11 +15,11 @@
 <form action="/searches/new" method="get">
   <button id="indexa" type="submit">Go to Search page</button>
 </form>
-<main>
+<main class="main">
   <h2>There is <%=resultsNum %> books added to your menu</h2>
   <% if (results.length) { %>
   <% results.forEach(book=> {%>
-  <div id="">
+  <div>
     <img src="<%= book.image %>" alt="">
     <p id="title">
       <%= book.title %>
@@ -28,11 +28,13 @@
       <%= book.author %>
     </p>
      <a href='/books/<%= book.id %>' target="_blank" rel="noopener noreferrer">View details</a>
-   <% }) %> 
+     </div>  
+     <% }) %> 
    <% } else { %>
     <p>No data was found</p>
-    <% } %>
-  </div>
+ 
+     <% } %>
+
 </main>
 </body>
 </html>

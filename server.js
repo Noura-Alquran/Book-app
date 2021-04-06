@@ -52,36 +52,49 @@ function createSearch(req, res) {
       queryObj['q'] = `+inauthor:${searchValue}`;
     }
     superagent.get(url).query(queryObj).then(resultRes => {
-      return resultRes.body.items.slice([0,10]).map(bookResult => new Books(bookResult.volumeInfo))
+      return resultRes.body.items.slice([0,10]).map(bookResult => new Books(bookResult))
     }).then(results => {
-      res.render('pages/show', { searchResults: results })
+      res.render('pages/show', { results: results })
     }).catch((error)=>{
         res.status(500).render('pages/error',{error :error, massage:'Oops..!Something went wrong'})
     })
   }
   
   app.get('/books/:id',getSingleBook);
-
   function getSingleBook(req, res){
     const bookId = req.params.id;
     console.log(bookId);
     const sqlSelectQuery = 'SELECT * FROM books WHERE id=$1';
     const safeValues = [bookId];
     client.query(sqlSelectQuery, safeValues).then(results => {
-      res.render('pages/books/detail', { results: results.rows });
+      res.render('pages/books/show', { results: results.rows});
     }).catch((error)=>{
       res.status(500).render('pages/error',{error :error, massage:'Oops..!Something went wrong'})
   })
 }
 
-function Books(book) {
-    const placeholderImage = 'https://i.imgur.com/J5LVHEL.jpg';
-    this.image = book.imageLinks ? book.imageLinks.thumbnail : placeholderImage;
-    this.title = book.title || 'No title available';
-    this.author= book.authors || 'No author avaliable';
-    this.description = book.description ||book.subtitle || 'Description not Found for this book';
+app.post('/books', addbook);
+function addbook(req, res) {
+  const { title, author, isbn, image, description, bookshelf } = req.body;
+  const sqlQuery = 'INSERT INTO books (title, author, isbn, image, description,bookshelf) VALUES($1,$2,$3,$4,$5,$6);';
+  const safeValues = [title, author, '',image, description, bookshelf];
+  client.query(sqlQuery, safeValues).then(() => {
+    res.redirect('/');
+  }).catch((error)=>{
+    res.status(500).render('pages/error',{error :error, massage:'Oops..!Something went wrong'})
+  });
+}
 
- }
+  
+function Books(info) {
+  const placeholderImage = "https://i.imgur.com/J5LVHEL.jpg";
+  this.image = info.volumeInfo.imageLinks ? info.volumeInfo.imageLinks.thumbnail : placeholderImage;
+  this.title = info.volumeInfo.title || "No title available";
+  this.authors = info.volumeInfo.authors || "The author not provided";
+  this.description = info.volumeInfo.description || info.subtitle || "The description not provided";
+  this.ispn = info.id;
+  this.bookshelf = info.volumeInfo.categories ? info.volumeInfo.categories[0] : 'None';
+}
   
 app.use('*' , function(req , res){
     res.status(404).send('noting to show here');
