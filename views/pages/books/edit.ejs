@@ -1,0 +1,27 @@
+<%- include('../layout/head.ejs') %>
+
+    <main class="main">
+        <div>
+            <form action="/edit/<%=results.id%>?_method=PUT" method="POST">
+                <fieldset>
+                    <legend>Update book</legend>
+                    <br> Book title
+                    <input type="text" name="title" value="<%= results.title %>" id="searched">
+                    <br> Book author
+                    <input type="text" name="authors" value="<%= results.author %>" id="searched">
+                    <br> Book isbn
+                    <input type="text" name="isbn" value="<%= results.isbn %>" id="searched">
+                    <br> Book image
+                    <input type="text" name="image_url" value="<%= results.image%>" id="searched">
+                    <br> Book description
+                    <br>
+                    <textarea cols="25" rows="12" name="description" id="searched" class="dd">
+                        <%= results.description %>
+                            </textarea>
+                    <br> Bookshelf
+                    <input autocomplete=" off " type="text " name="bookshelf " value="<%=results.bookshelf %>" id="searched">
+                    <input type="submit" value="Update Book" id="button">
+                </fieldset>
+            </form>
+        </div>
+    </main>

@@ -2,6 +2,8 @@
 require('dotenv').config();
 const express = require('express');
 const superagent = require('superagent');
+const methodOverride = require('method-override');
+
 // const path= require('path');
 const app = express();
 const pg = require('pg');
@@ -13,16 +15,16 @@ app.use(express.static('./public'));
 // app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.urlencoded({ extended: true, }));
 
+app.use(methodOverride('_method'));
 
+const client = new pg.Client(process.env.DATABASE_URL);
 
-// const client = new pg.Client(process.env.DATABASE_URL);
-
-const client = new pg.Client({
-    connectionString: DATABASE_URL,
-    ssl: {
-        rejectUnauthorized: false
-    }
-});
+// const client = new pg.Client({
+//     connectionString: DATABASE_URL,
+//     ssl: {
+//         rejectUnauthorized: false
+//     }
+// });
 
 app.set('view engine', 'ejs');
 app.get('/', renderHomePage);
@@ -30,9 +32,9 @@ app.get('/searches/new', showForm);
 app.post('/searches', createSearch);
 app.get('/books/:id', getSingleBook);
 app.post('/books', addbook);
-
-
-
+app.get('/edit/:id', handleData);
+app.put('/edit/:id', handleUpdate);
+app.delete('/books/:id', handleDelete);
 
 client.on('error', error => console.error(error));
 
@@ -74,7 +76,7 @@ function createSearch(req, res) {
 function getSingleBook(req, res) {
     const bookId = req.params.id;
     console.log(bookId);
-    const sqlSelectQuery = 'SELECT * FROM books WHERE id=$1';
+    const sqlSelectQuery = 'SELECT * FROM books WHERE id=$1;';
     const safeValues = [bookId];
     client.query(sqlSelectQuery, safeValues).then(results => {
         res.render('pages/books/show', { results: results.rows });
@@ -83,7 +85,7 @@ function getSingleBook(req, res) {
 
 function addbook(req, res) {
     const { title, author, isbn, image, description, bookshelf } = req.body;
-    const sqlQuery = 'INSERT INTO books (title, author, isbn, image, description, bookshelf) VALUES($1,$2,$3,$4,$5,$6) RETURNING id;';
+    const sqlQuery = 'INSERT INTO books (title, author, isbn, image, description , bookshelf) VALUES($1,$2,$3,$4,$5,$6) RETURNING id;';
     const safeValues = [title, author, isbn, image, description, bookshelf];
     client.query(sqlQuery, safeValues).then(result => {
         // const getSqlData='SELECT id FROM books WHERE isbn=$1';
@@ -95,12 +97,42 @@ function addbook(req, res) {
     }).catch(error => { handleError(error, res) });
 }
 
+function handleData(req, res) {
+    const bookId = req.params.id;
+    const sqlSelectQuery = 'SELECT * FROM books WHERE id=$1;';
+    const safeValues = [bookId];
+    client.query(sqlSelectQuery, safeValues).then(results => {
+        res.render('pages/books/edit', { results: results.rows[0] });
+    }).catch(error => { handleError(error, res) });
+
+
+}
+
+function handleUpdate(req, res) {
+    const bookId = req.params.id;
+    console.log(bookId);
+    const { title, author, isbn, image, description, bookshelf } = req.body;
+    const safeValues = [title, author, isbn, image, description, bookshelf, bookId];
+    const updateQuery = 'UPDATE books SET title=$1, author=$2, isbn=$3, image=$4, description=$5, bookshelf=$6 WHERE id=$7;';
+    client.query(updateQuery, safeValues).then(() => {
+        res.redirect(`/books/${bookId}`);
+    }).catch(error => { handleError(error, res) });
+}
+
+function handleDelete(req, res) {
+    const bookId = req.params.id;
+    const deleteQuery = 'DELETE FROM books WHERE id=$1;';
+    const safeValues = [bookId];
+    client.query(deleteQuery, safeValues).then(() => {
+        res.redirect('/');
+    }).catch(error => { handleError(error, res) });
+}
 
 function Books(info) {
     const placeholderImage = "https://i.imgur.com/J5LVHEL.jpg";
     this.image = info.volumeInfo.imageLinks ? info.volumeInfo.imageLinks.thumbnail : placeholderImage;
     this.title = info.volumeInfo.title || "No title available";
-    this.authors = info.volumeInfo.authors || "The author not provided";
+    this.author = info.volumeInfo.authors || "The author not provided";
     this.description = info.volumeInfo.description || info.subtitle || "The description not provided";
     this.isbn = info.volumeInfo.industryIdentifiers ? info.volumeInfo.industryIdentifiers.identifier : "The isbn not provided";
     this.bookshelf = info.volumeInfo.categories ? info.volumeInfo.categories : 'None';

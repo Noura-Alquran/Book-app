@@ -14,8 +14,23 @@
         <form action="/" method="get">
             <button type="submit">Go to the main page</button>
         </form>
-
-        <%- include('detail.ejs') %>
+        <!-- <%- include('detail.ejs') %> -->
+         <% results.forEach(book=> {%> 
+          <div>
+        <img src="<%= book.image %>" alt="">    
+         <h2><%= book.title%></h2>
+         <p><%=book.author%></p>
+         <p><%=book.description%></p>
+         <p>ISBN : <%=book.isbn%></p>
+         <p>Bookshelf : <%=book.bookshelf%></p>
+     <form action="/edit/<%= book.id %>" method="get"> 
+    <button type="submit" value="Update Details">Update Details</button>
+    </form>
+     <form  action="/books/<%= book.id %>?_method=DELETE" method="POST">
+          <button type="submit">DELETE</button>
+      </form>
+    </div>
+       <% }) %>         
 
     </main>
 </body>
